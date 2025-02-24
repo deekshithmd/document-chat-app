@@ -4,7 +4,7 @@ import { DocumentUpload } from '../DocumentUpload'
 export const Content = () => {
     const [fileContent, setFileContent] = useState('');
     const [question, setQuestion] = useState('');
-    const [chatHistory, setChatHistory] = useState([{ question: 'sample quation', answer: 'sample answer' }])
+    const [chatHistory, setChatHistory] = useState([])
 
     const handleContentFromDocuemnt = (content: string) => {
         setFileContent(content)
