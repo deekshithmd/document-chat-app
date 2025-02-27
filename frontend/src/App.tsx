@@ -6,8 +6,6 @@ import './App.css'
 
 function App() {
 
-  console.log(import.meta.env.VITE_GOOGLE_CLIENT_ID)
-
   return (
     <div className='w-full p-0 m-0'>
       <Header />

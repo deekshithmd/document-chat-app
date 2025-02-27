@@ -1,4 +1,4 @@
-import { Ollama } from 'ollama'
+const { Ollama } = require('ollama')
 
 const ollama = new Ollama({ host: 'http://localhost:11434' })
 
@@ -28,4 +28,4 @@ const getAnswer = async (baseContent, question, chatHistory) => {
     return { newChat };
 }
 
-export default getAnswer;
+module.exports = getAnswer;
