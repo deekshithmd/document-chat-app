@@ -51,7 +51,7 @@ router.post('/login', [
         }
         try {
             const { email, password } = req.body;
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ where: { email } });
             if (!user) {
                 return res.status(400).json({ errors: [{ msg: 'User not found' }] });
             }
@@ -60,15 +60,31 @@ router.post('/login', [
                 return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
             }
 
-            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES });
 
-            res.json({ token });
+
+            // Set the token as an HTTP-only cookie
+            res.cookie('token', token, {
+                httpOnly: true, // Cookie accessible only through HTTP(S)
+                //secure: process.env.NODE_ENV === 'production', // Send cookie only over HTTPS in production
+                maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+                sameSite: 'Lax', // or 'Strict' for more security
+            });
+
+
+            res.json({ msg: 'Successfully logged in' });
         }
         catch (error) {
+            console.log(error);
             return res.status(500).json({ error: 'Error while finding user data' });
         }
     }
 )
+
+router.post('/logout', async (req, res) => {
+    res.clearCookie('token');
+    res.json({ message: 'Logged out successfully' })
+})
 
 module.exports = router;
 
