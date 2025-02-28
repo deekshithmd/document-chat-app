@@ -60,7 +60,7 @@ export const Login = () => {
                 <input value={password} type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} className='border rounded px-3 py-2' />
                 <button onClick={handleLogin} className='border rounded bg-green-200 p-1 cursor-pointer'>Login</button>
             </div>
-            <a href="/signup" className="text-blue-500 hover:underline mt-3">Signup</a>
-        </div>
+            <p>Don't have account?  <a href="/signup" className="text-blue-500 hover:underline mt-3">Signup</a></p>
+        </div >
     )
 }

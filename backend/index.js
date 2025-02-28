@@ -4,6 +4,7 @@ const getAnswer = require('./llm.js');
 const sequelize = require('./config/db.js');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth.js');
+const userRoutes = require('./routes/user.js');
 
 
 require('dotenv').config();
@@ -19,6 +20,8 @@ app.use(cookieParser());
 const chatHistory = [];
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/user', userRoutes);
+
 
 app.post('/api/v1/chat', async (req, res) => {
     const { baseContent, question } = req.body;
