@@ -21,8 +21,12 @@ const User = sequelize.define('users', {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
+    googleId: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 })
 
 module.exports = User;

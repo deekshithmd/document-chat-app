@@ -27,11 +27,26 @@ export const Login = () => {
         }
     }
 
-    const onSuccessResponse = (response: CredentialResponse) => {
-        console.log('Login Success!', response);
-        navigate('/home'); // Redirect the user to the home page
-        // TODO: Store the user token in the application state
-        // or redirect the user to a different page
+    const onSuccessResponse = async (response: CredentialResponse) => {
+        try {
+            console.log('Login Success!', response);
+            const { credential } = response;
+            const res = await fetch('http://localhost:5000/api/v1/auth/google', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: credential }),
+                credentials: 'include'
+            })
+            if (!res.ok) {
+                throw new Error('Google login failed')
+            }
+            const data = await res.json()
+            console.log('Logged in user', data)
+            navigate('/home')
+        }
+        catch (error) {
+            console.log("Error while login through google login", error);
+        }
     }
 
     const onFailureResponse = () => {
