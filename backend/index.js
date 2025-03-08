@@ -41,4 +41,6 @@ sequelize.sync({ force: false }).then(() => {
     });
 })
 
+//I want to take file as input, and extract content from it, then use some llm model to get the summary of the file content and implement the chat feature where user can ask any question to ai so that model will provide response by analysing the content of the file, provide my step by step process to implement this feature, need system design info to solve this problem statement.
+
 
