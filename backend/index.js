@@ -5,6 +5,7 @@ const sequelize = require('./config/db.js');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth.js');
 const userRoutes = require('./routes/user.js');
+const documentRoutes = require('./routes/document.js');
 
 
 require('dotenv').config();
@@ -21,6 +22,7 @@ const chatHistory = [];
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/document', documentRoutes)
 
 
 app.post('/api/v1/chat', async (req, res) => {

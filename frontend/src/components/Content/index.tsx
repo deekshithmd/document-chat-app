@@ -11,19 +11,27 @@ export const Content = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-        formData.append('folder', 'document_chat');
+        formData.append('folder', 'doc_insight_ai');
 
 
         try {
             const res = await fetch(
-                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/auto/upload`,
+                `${import.meta.env.VITE_CLOUDINARY_API_URL}/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/auto/upload`,
                 {
                     method: "POST",
                     body: formData,
                 }
             );
             const data = await res.json();
-            console.log(data);
+            const docUrl = data?.secure_url;
+
+            await fetch('http://localhost:5000/api/v1/document/upload', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: docUrl, fileName: file?.name }),
+                credentials: 'include'
+            })
+
         } catch (err) {
             console.log(err);
         }
