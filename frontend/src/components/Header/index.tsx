@@ -17,9 +17,13 @@ export const Header = () => {
         }
     }
 
+    const handleNavigateToHome = () => {
+        navigate('/home')
+    }
+
     return (
-        <div className="w-full flex items-center justify-between px-3 py-2 bg-amber-100">
-            <h1 className='font-semibold'>DocInsightAI</h1>
+        <div className="w-full h-[8vh] flex items-center justify-between px-3 bg-amber-100 sticky top-0 z-10">
+            <h1 className='font-semibold text-2xl cursor-pointer' onClick={handleNavigateToHome}>DocInsightAI</h1>
             <div>
                 <button className='px-3 py-2 rounded-2xl bg-blue-300 cursor-pointer' onClick={handleLogout}>Logout</button>
             </div>

@@ -5,6 +5,7 @@ import { Signup } from './pages/Signup'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { ViewDocument } from './pages/ViewDocument'
 
 function App() {
 
@@ -16,7 +17,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/document/:docId" element={<ViewDocument />} />
           <Route index element={<Navigate to="/home" replace />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

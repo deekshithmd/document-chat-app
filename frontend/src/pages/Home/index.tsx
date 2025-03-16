@@ -1,5 +1,5 @@
-import { Content } from '../../components/Content'
+import { HomepageLayout } from '../../layouts/HomepageLayout'
 
 export const Home = () => {
-    return (<Content />)
+    return (<HomepageLayout />)
 }
